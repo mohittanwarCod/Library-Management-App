@@ -17,6 +17,7 @@ import Dashboard from "./pages/Dashboard"
 function App() {
 
   const [user,setUser] = useState({});
+  const [loading,setLoading] = useState(false);
   const authCheck = async ()=>{
     const res = await axios.get(`${BASE_URL}/api/v1/user/profile`,{
       withCredentials:true

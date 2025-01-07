@@ -4,9 +4,11 @@ import axios from 'axios';
 import BookCard from '../components/BookCard';
 import AddBook from '../components/AddBook.jsx';
 import { useNavigate } from 'react-router-dom';
+import Spinner from '../components/Spinner.jsx';
 
 function Books({user,userRole}) {
   const [books, setBooks] = useState([]);
+  const [loading,setLoading] = useState(false);
 //   console.log(user);
   const [isCreateBookFormOpen, setIsCreateBookFormOpen] = useState(false);
 //   const userRole = "admin";
@@ -18,14 +20,18 @@ function Books({user,userRole}) {
    }
     const fetchBooks = async () => {
       try {
+        setLoading(true);
         const response = await axios.get(`${BASE_URL}/api/v1/books`);
         if (response.data.success) {
           setBooks(response.data.books);
         } else {
           console.error('Error fetching books');
         }
+        setLoading(false);
       } catch (error) {
+        setLoading(false);
         console.error('Error fetching books', error);
+        
       }
     };
 
@@ -54,7 +60,10 @@ function Books({user,userRole}) {
   
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <>
+   
+   
+   {loading?<Spinner/>:<div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="max-w-7xl mx-auto p-6">
         {/* Conditionally render the Admin buttons */}
         {userRole === "admin" && (
@@ -88,6 +97,8 @@ function Books({user,userRole}) {
         </div>
       </div>
     </div>
+} 
+ </>        
   );
 }
 
