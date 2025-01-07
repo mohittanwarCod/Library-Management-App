@@ -9,7 +9,7 @@ dotenv.config({
     path:'./.env'
 })
 app.use(cors({
-    origin:"http://localhost:5173",
+    origin:"https://library-management-app-red.vercel.app",
     credentials:true
 }));
 app.use(express.urlencoded({extended:true,limit:"16kb"}));
