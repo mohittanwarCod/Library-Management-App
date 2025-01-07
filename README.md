@@ -2,6 +2,18 @@
 
 The **Library Management App** is a web-based platform designed to facilitate the management of books, users, and transactions in a library setting. This project includes a **frontend** built with React and a **backend** powered by Node.js, Express, and MongoDB.
 
+## Demo Admin Account 
+
+- **name**: mohit,
+- **email**: mohit.admin@gmail.com,
+- **password**: 1233,
+   
+## Demo User Account 
+
+- **name**: mohit,
+- **email**: mohit.user@gmail.com,
+- **password**: 1233,
+
 ---
 
 ## Features
@@ -19,7 +31,7 @@ The **Library Management App** is a web-based platform designed to facilitate th
 ### Frontend:
 - **React.js**
 - **Redux Toolkit** (State Management)
-- **CSS/Bootstrap**
+- **TailwindCSS**
 
 ### Backend:
 - **Node.js**
@@ -112,11 +124,12 @@ The backend is hosted on a cloud platform (e.g., AWS, Heroku, or Render). Ensure
 - `POST /user/register`: Register a new user.
 - `POST /user/login`: Login a user.
 - `GET /user/profile`: Get user profile (requires authentication).
+- `GET /user/logout`: Logout user profile (requires authentication).
 
 #### Transactions:
 - `POST /transaction/issue`: Issue a book.
 - `POST /transaction/return`: Return a book.
-- `GET /transaction/history`: Get transaction history.
+- `GET /transaction/date`: Get transaction history on date.
 
 ---
 
