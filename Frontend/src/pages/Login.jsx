@@ -2,9 +2,10 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../constant';
+import Spinner from '../components/Spinner';
 
 function Login({setUser,user}) {
-
+    const [loading,setLoading] = useState(false);
     const navigate = useNavigate();
     if(user?._id){
         navigate("/")
@@ -26,6 +27,7 @@ function Login({setUser,user}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(formData); // Replace this with your API call
+    setLoading(true);
     const res = await axios.post(`${BASE_URL}/api/v1/user/login`,formData,{
         withCredentials:true
     })
@@ -34,6 +36,7 @@ function Login({setUser,user}) {
         setUser(res.data.loggedInUser)
         navigate("/")
     }
+    setLoading(false);
     // console.log(res)
   };
 
@@ -42,6 +45,8 @@ function Login({setUser,user}) {
   };
 
   return (
+    <>
+   {loading?<Spinner />:
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6">
         <h2 className="text-2xl font-semibold text-center text-gray-700 mb-4">Login</h2>
@@ -118,7 +123,10 @@ function Login({setUser,user}) {
         </div>
       </div>
     </div>
+}
+   </> 
   );
+
 }
 
 export default Login;

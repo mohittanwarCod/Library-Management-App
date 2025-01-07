@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { BASE_URL } from '../constant';
 import RentedBookCard from '../components/RentedBookCard';
 import axios from 'axios';
+import Spinner from '../components/Spinner';
 
 function RentedBooks({user}) {
 //   const user = "677c59c04ef7d3f6eee4a9a2"; // Assume this is the user ID
   const [rentedBooks, setRentedBooks] = useState([]);
+   const [loading,setLoading] = useState(false);
 
   // Fetch rented books list
   const fetchRentedBooksList = async () => {
+    setLoading(true);
     try {
       const res = await axios.post(`${BASE_URL}/api/v1/books/rented`, { user: user._id });
       if (res.data.success) {
@@ -18,6 +21,7 @@ function RentedBooks({user}) {
     } catch (error) {
       console.error("Error fetching rented books:", error);
     }
+    setLoading(false);
   };
 
   // Handle returning the rented book
@@ -45,7 +49,9 @@ function RentedBooks({user}) {
   }, []);
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <>
+    {loading?<Spinner />:
+      <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="max-w-7xl mx-auto p-6">
         {/* List of rented books */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -60,6 +66,9 @@ function RentedBooks({user}) {
         </div>
       </div>
     </div>
+    }
+    
+    </>
   );
 }
 
