@@ -205,6 +205,10 @@ function Dashboard({ user }) {
                   {transaction.book?.title}
                 </p>
                 <p>
+                  <span className="font-semibold">Type:</span>{" "}
+                  {transaction.transactionType}
+                </p>
+                <p>
                   <span className="font-semibold">Date:</span>{" "}
                   {transaction.borrowDate || transaction.returnedDate}
                 </p>
