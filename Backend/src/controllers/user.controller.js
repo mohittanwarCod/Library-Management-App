@@ -58,7 +58,7 @@ const createUser = async (req,res)=>{
     const options = {
         httpOnly:true,
         secure:true,
-        
+        sameSite:'none'
         // withCredentials:true
     }
 

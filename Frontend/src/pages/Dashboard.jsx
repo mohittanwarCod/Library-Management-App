@@ -92,7 +92,7 @@ function Dashboard({ user }) {
       const response = await axios.post(`${BASE_URL}/api/v1/transaction/date`, {
         date: formattedDate,
       });
-      // console.log(response.data.transactions);
+      console.log(response.data.transactions);
       if (response.data.success) {
         setTransactions(response.data.transactions);
       } else {
@@ -186,8 +186,9 @@ function Dashboard({ user }) {
         {/* Transactions List */}
         <div className="mt-6 h-64 overflow-y-auto bg-gray-50 border rounded-lg p-4">
           {transactions.length > 0 ? (
-            transactions.map((transaction, index) => (
-              <div
+            transactions.map((transaction, index) => {
+              if(!transaction.book || !transaction.user) return;
+             return  <div
                 key={transaction._id}
                 className="mb-4 p-4 bg-white shadow rounded-lg"
               >
@@ -208,8 +209,9 @@ function Dashboard({ user }) {
                   {transaction.borrowDate || transaction.returnedDate}
                 </p>
               </div>
+            }
             ))
-          ) : (
+ : (
             <p className="text-gray-600">No transactions found.</p>
           )}
         </div>
