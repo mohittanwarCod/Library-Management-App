@@ -34,7 +34,7 @@ function BorrowBook({user}) {
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-6 max-w-7xl mx-auto">
         {books.map((book) => (
-         book.user?<BookCard key={book._id} bookDetail={book} bookBtn={true} onRent={removeBookFromList} user={user} />:""
+         <BookCard key={book._id} bookDetail={book} bookBtn={true} onRent={removeBookFromList} user={user} />
         ))}
       </div>
     </div>
